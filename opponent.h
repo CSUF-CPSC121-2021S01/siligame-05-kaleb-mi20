@@ -1,6 +1,7 @@
 #ifndef OPPONENT_H
 #define OPPONENT_H
 
+#include <memory>
 #include "cpputils/graphics/image.h"
 #include "game_element.h"
 

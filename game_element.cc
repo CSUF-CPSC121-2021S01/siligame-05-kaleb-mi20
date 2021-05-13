@@ -1,19 +1,19 @@
 #include "game_element.h"
 #include <iostream>
 
-bool GameElement::IntersectsWith(GameElement &element2) {
+bool GameElement::IntersectsWith(GameElement* element2) {
   // element 1
   int element1_xZone = GetX() + GetWidth();
   int element1_yZone = GetY() + GetHeight();
   // element 2
-  int element2_xZone = element2.GetX() + element2.GetWidth();
-  int element2_yZone = element2.GetY() + element2.GetWidth();
+  int element2_xZone = (*element2).GetX() + (*element2).GetWidth();
+  int element2_yZone = (*element2).GetY() + (*element2).GetWidth();
 
   // Checking for overlap
   if (GetX() < element2_xZone) {
-    if (element2.GetX() < element1_xZone) {
+    if ((*element2).GetX() < element1_xZone) {
       if (GetY() < element2_yZone) {
-        if (element2.GetY() < element1_yZone) {
+        if ((*element2).GetY() < element1_yZone) {
           return true;
         }
       }

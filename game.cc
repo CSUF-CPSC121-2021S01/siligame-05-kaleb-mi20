@@ -81,7 +81,7 @@ void Game::OnAnimationStep() {
 void Game::FilterIntersections() {
   // Opponent and player
   for (int i = 0; i < opponentlist_.size(); i++) {
-    if (opponentlist_[i].IntersectsWith(player_) == true) {
+    if (opponentlist_[i].IntersectsWith(&player_) == true) {
       opponentlist_[i].SetIsActive(false);
       player_.SetIsActive(false);
     }
@@ -89,7 +89,7 @@ void Game::FilterIntersections() {
   // Player projectile and opponents
   for (int j = 0; j < p_projlist_.size(); j++) {
     for (int k = 0; k < opponentlist_.size(); k++) {
-      if (p_projlist_[j].IntersectsWith(opponentlist_[k]) == true) {
+      if (p_projlist_[j].IntersectsWith(&opponentlist_[k]) == true) {
         p_projlist_[j].SetIsActive(false);
         opponentlist_[k].SetIsActive(false);
       }
@@ -97,7 +97,7 @@ void Game::FilterIntersections() {
   }
   // Opponent projectile and player
   for (int h = 0; h < o_projlist_.size(); h++) {
-    if (o_projlist_[h].IntersectsWith(player_) == true) {
+    if (o_projlist_[h].IntersectsWith(&player_) == true) {
       o_projlist_[h].SetIsActive(false);
       player_.SetIsActive(false);
     }
