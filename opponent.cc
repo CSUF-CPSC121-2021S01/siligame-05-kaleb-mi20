@@ -34,5 +34,6 @@ std::unique_ptr<class OpponentProjectile> Opponent::LaunchProjectile() {
     counter++;
     return std::make_unique<OpponentProjectile>(GetX() + 20, GetY() + 20);
   }
-  return nullptr
+  counter++;
+  return nullptr;
 }
