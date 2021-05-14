@@ -89,7 +89,7 @@ void Game::FilterIntersections() {
       if ((*p_projlist_[j]).IntersectsWith(opponentlist_[k].get())) {
         (*p_projlist_[j]).SetIsActive(false);
         (*opponentlist_[k]).SetIsActive(false);
-        if (player_.IsActive() == true) {
+        if (player_.GetIsActive() == true) {
           score_++;
         }
       }
