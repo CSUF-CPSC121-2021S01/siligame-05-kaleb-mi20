@@ -61,8 +61,12 @@ void Game::OnMouseEvent(const graphics::MouseEvent &mouseEvent) {
 }
 
 void Game::OnAnimationStep() {
+  if (opponentlist_.size() < 1) {
+    CreateOpponents();
+  }
   MoveGameElements();
   FilterIntersections();
+  RemoveInactive();
   UpdateScreen();
   gameScreen_.Flush();
 }
