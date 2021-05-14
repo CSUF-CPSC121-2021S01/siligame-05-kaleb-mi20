@@ -10,22 +10,10 @@ void Game::CreateOpponents() {
   opponentlist_.push_back(std::move(opponent));
 }
 
-void Game::CreateOpponentProjectiles() {
-  std::unique_ptr<OpponentProjectile> opponentproj = std::make_unique<OpponentProjectile>();
-  o_projlist_.push_back(std::move(opponentproj));
-}
-
-void Game::CreatePlayerProjectiles() {
-  std::unique_ptr<PlayerProjectile> playerproj = std::make_unique<PlayerProjectile>();
-  p_projlist_.push_back(playerproj);
-}
-
 void Game::Init() {
   player_.SetX(400);
   player_.SetY(500);
   CreateOpponents();
-  CreateOpponentProjectiles();
-  CreatePlayerProjectiles();
   gameScreen_.AddMouseEventListener(*this);
   gameScreen_.AddAnimationEventListener(*this);
 }
@@ -40,22 +28,22 @@ void Game::UpdateScreen() {
 
   // Opponents
   for (int i = 0; i < opponentlist_.size(); i++) {
-    if (opponentlist_[i]->GetIsActive() == true) {
-      opponentlist_[i]->Draw(gameScreen_);
+    if ((*opponentlist_[i]).GetIsActive() == true) {
+      (*opponentlist_[i]).Draw(gameScreen_);
     }
   }
 
   // Opponent projectiles
   for (int j = 0; j < o_projlist_.size(); j++) {
-    if (o_projlist_[j]->GetIsActive() == true) {
-      o_projlist_[j]->Draw(gameScreen_);
+    if ((*o_projlist_[j]).GetIsActive() == true) {
+      (*o_projlist_[j]).Draw(gameScreen_);
     }
   }
 
   // Player projectiles
   for (int k = 0; k < p_projlist_.size(); k++) {
-    if (p_projlist_[k]->GetIsActive() == true) {
-      p_projlist_[k]->Draw(gameScreen_);
+    if ((*p_projlist_[k]).GetIsActive() == true) {
+      (*p_projlist_[k]).Draw(gameScreen_);
     }
   }
 }
@@ -85,22 +73,25 @@ void Game::FilterIntersections() {
     if ((*opponentlist_[i]).IntersectsWith(&player_) == true) {
       (*opponentlist_[i]).SetIsActive(false);
       player_.SetIsActive(false);
+      hasLost_ = true;
     }
   }
   // Player projectile and opponents
   for (int j = 0; j < p_projlist_.size(); j++) {
     for (int k = 0; k < opponentlist_.size(); k++) {
-      if ((*p_projlist_[j]).IntersectsWith(opponentlist_[k]) == true) {
+      if ((*p_projlist_[j]).IntersectsWith(opponentlist_[k].get())) {
         (*p_projlist_[j]).SetIsActive(false);
         (*opponentlist_[k]).SetIsActive(false);
+        score_++;
       }
     }
   }
   // Opponent projectile and player
   for (int h = 0; h < o_projlist_.size(); h++) {
-    if ((*o_projlist_[h]).IntersectsWith(&player_) == true) {
+    if (player_.IntersectsWith(o_projlist_[h].get()) == true) {
       (*o_projlist_[h]).SetIsActive(false);
       player_.SetIsActive(false);
+      hasLost_ = true;
     }
   }
 }
@@ -124,6 +115,24 @@ void Game::MoveGameElements() {
   for (int k = 0; k < p_projlist_.size(); k++) {
     if ((*p_projlist_[k]).GetIsActive() == true) {
       (*p_projlist_[k]).Move(gameScreen_);
+    }
+  }
+}
+
+void Game::RemoveInactive() {
+  for (int i = 0; i < opponentlist_.size(); i++) {
+    if ((*opponentlist_[i]).GetIsActive() == false) {
+      opponentlist_.erase(opponentlist_.begin() + i);
+    }
+  }
+  for (int k = 0; k < o_projlist_.size(); k++) {
+    if ((*o_projlist_[k]).GetIsActive() == false) {
+      o_projlist_.erase(o_projlist_.begin() + k);
+    }
+  }
+  for (int h = 0; h < p_projlist_.size(); h++) {
+    if ((*p_projlist_[h]).GetIsActive() == false) {
+      p_projlist_.erase(p_projlist_.begin() + h);
     }
   }
 }
