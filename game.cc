@@ -54,9 +54,11 @@ void Game::OnMouseEvent(const graphics::MouseEvent &mouseEvent) {
     if (mouseEvent.GetX() > 0 && mouseEvent.GetY() > 0 &&
         mouseEvent.GetX() < gameScreen_.GetWidth() &&
         mouseEvent.GetY() < gameScreen_.GetHeight()) {
-      player_.SetX(mouseEvent.GetX() - player_.GetWidth() * (0.5));
-      player_.SetY(mouseEvent.GetY() - player_.GetWidth() * (0.5));
+      player_.SetX(mouseEvent.GetX() - player_.GetWidth() / 2);
+      player_.SetY(mouseEvent.GetY() - player_.GetWidth() / 2);
     }
+  }
+  if (mouseEvent.GetMouseAction() == graphics::MouseAction::kPressed || mouseEvent.GetMouseAction() == graphics::MouseAction::kDragged) {
     std::unique_ptr<PlayerProjectile> clickedptr = std::make_unique<PlayerProjectile>(mouseEvent.GetX(), mouseEvent.GetY());
     p_projlist_.push_back(std::move(clickedptr));
   }
