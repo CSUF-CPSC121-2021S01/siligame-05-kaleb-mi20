@@ -57,6 +57,8 @@ void Game::OnMouseEvent(const graphics::MouseEvent &mouseEvent) {
       player_.SetX(mouseEvent.GetX() - player_.GetWidth() * (0.5));
       player_.SetY(mouseEvent.GetY() - player_.GetWidth() * (0.5));
     }
+    std::unique_ptr<PlayerProjectile> clickedptr = std::make_unique<PlayerProjectile>(mouseEvent.GetX(), mouseEvent.GetY());
+    p_projlist_.push_back(std::move(clickedptr));
   }
 }
 
@@ -65,6 +67,7 @@ void Game::OnAnimationStep() {
     CreateOpponents();
   }
   MoveGameElements();
+  LaunchProjectiles();
   FilterIntersections();
   RemoveInactive();
   UpdateScreen();
@@ -86,7 +89,9 @@ void Game::FilterIntersections() {
       if ((*p_projlist_[j]).IntersectsWith(opponentlist_[k].get())) {
         (*p_projlist_[j]).SetIsActive(false);
         (*opponentlist_[k]).SetIsActive(false);
-        score_++;
+        if (player_.IsActive() == true) {
+          score_++;
+        }
       }
     }
   }
@@ -125,17 +130,17 @@ void Game::MoveGameElements() {
 
 void Game::RemoveInactive() {
   for (int i = 0; i < opponentlist_.size(); i++) {
-    if ((*opponentlist_[i]).GetIsActive() == false) {
+    if (opponentlist_[i]->GetIsActive() == false) {
       opponentlist_.erase(opponentlist_.begin() + i);
     }
   }
   for (int k = 0; k < o_projlist_.size(); k++) {
-    if ((*o_projlist_[k]).GetIsActive() == false) {
+    if (o_projlist_[k]->GetIsActive() == false) {
       o_projlist_.erase(o_projlist_.begin() + k);
     }
   }
   for (int h = 0; h < p_projlist_.size(); h++) {
-    if ((*p_projlist_[h]).GetIsActive() == false) {
+    if (p_projlist_[h]->GetIsActive() == false) {
       p_projlist_.erase(p_projlist_.begin() + h);
     }
   }
