@@ -40,22 +40,22 @@ void Game::UpdateScreen() {
 
   // Opponents
   for (int i = 0; i < opponentlist_.size(); i++) {
-    if ((*opponentlist_[i]).GetIsActive() == true) {
-      (*opponentlist_[i]).Draw(gameScreen_);
+    if (opponentlist_[i]->GetIsActive() == true) {
+      opponentlist_[i]->Draw(gameScreen_);
     }
   }
 
   // Opponent projectiles
   for (int j = 0; j < o_projlist_.size(); j++) {
-    if ((*o_projlist_[j]).GetIsActive() == true) {
-      (*o_projlist_[j]).Draw(gameScreen_);
+    if (o_projlist_[j]->GetIsActive() == true) {
+      o_projlist_[j]->Draw(gameScreen_);
     }
   }
 
   // Player projectiles
   for (int k = 0; k < p_projlist_.size(); k++) {
-    if ((*p_projlist_[k]).GetIsActive() == true) {
-      (*p_projlist_[k]).Draw(gameScreen_);
+    if (p_projlist_[k]->GetIsActive() == true) {
+      p_projlist_[k]->Draw(gameScreen_);
     }
   }
 }
