@@ -38,6 +38,7 @@ class Game : graphics::AnimationEventListener, graphics::MouseEventListener {
   void FilterIntersections();
   void MoveGameElements();
   void RemoveInactive();
+  void LaunchProjectiles();
   int GetScore() const { return score_; }
   bool HasLost() const { return hasLost_; }
 

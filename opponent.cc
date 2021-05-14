@@ -28,3 +28,7 @@ void OpponentProjectile::Move(const graphics::Image &image) {
     GameElement::SetIsActive(false);
   }
 }
+
+std::unique_ptr<class OpponentProjectile> Opponent::LaunchProjectile() {
+
+}

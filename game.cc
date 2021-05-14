@@ -136,3 +136,14 @@ void Game::RemoveInactive() {
     }
   }
 }
+
+void Game::LaunchProjectiles() {
+  for (int i = 0; i < opponentlist_.size(); i++) {
+    std::unique_ptr<OpponentProjectile> oprojptr = opponentlist_[i]->LaunchProjectile();
+      if (oprojptr == nullptr) {
+        return;
+      } else {
+        o_projlist_.push_back(oprojptr);
+      }
+  }
+}
