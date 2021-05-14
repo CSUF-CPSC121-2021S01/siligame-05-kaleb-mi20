@@ -1,22 +1,23 @@
 #include "game.h"
 #include <iostream>
+#include <memory>
 #include <vector>
 #include "opponent.h"
 #include "player.h"
 
 void Game::CreateOpponents() {
-  Opponent enemy;
-  opponentlist_.push_back(enemy);
+  std::unique_ptr<Opponent> opponent = std::make_unique<Opponent>();
+  opponentlist_.push_back(std::move(opponent));
 }
 
 void Game::CreateOpponentProjectiles() {
-  OpponentProjectile enemyshot;
-  o_projlist_.push_back(enemyshot);
+  std::unique_ptr<OpponentProjectile> opponentproj = std::make_unique<OpponentProjectile>();
+  o_projlist_.push_back(std::move(opponentproj));
 }
 
 void Game::CreatePlayerProjectiles() {
-  PlayerProjectile playershot;
-  p_projlist_.push_back(playershot);
+  std::unique_ptr<PlayerProjectile> playerproj = std::make_unique<PlayerProjectile>();
+  p_projlist_.push_back(playerproj);
 }
 
 void Game::Init() {
@@ -39,22 +40,22 @@ void Game::UpdateScreen() {
 
   // Opponents
   for (int i = 0; i < opponentlist_.size(); i++) {
-    if (opponentlist_[i].GetIsActive() == true) {
-      opponentlist_[i].Draw(gameScreen_);
+    if ((*opponentlist_[i]).GetIsActive() == true) {
+      (*opponentlist_[i]).Draw(gameScreen_);
     }
   }
 
   // Opponent projectiles
   for (int j = 0; j < o_projlist_.size(); j++) {
-    if (o_projlist_[j].GetIsActive() == true) {
-      o_projlist_[j].Draw(gameScreen_);
+    if ((*o_projlist_[j]).GetIsActive() == true) {
+      (*o_projlist_[j]).Draw(gameScreen_);
     }
   }
 
   // Player projectiles
   for (int k = 0; k < p_projlist_.size(); k++) {
-    if (p_projlist_[k].GetIsActive() == true) {
-      p_projlist_[k].Draw(gameScreen_);
+    if ((*p_projlist_[k]).GetIsActive() == true) {
+      (*p_projlist_[k]).Draw(gameScreen_);
     }
   }
 }
@@ -81,24 +82,24 @@ void Game::OnAnimationStep() {
 void Game::FilterIntersections() {
   // Opponent and player
   for (int i = 0; i < opponentlist_.size(); i++) {
-    if (opponentlist_[i].IntersectsWith(&player_) == true) {
-      opponentlist_[i].SetIsActive(false);
+    if ((*opponentlist_[i]).IntersectsWith(&player_) == true) {
+      (*opponentlist_[i]).SetIsActive(false);
       player_.SetIsActive(false);
     }
   }
   // Player projectile and opponents
   for (int j = 0; j < p_projlist_.size(); j++) {
     for (int k = 0; k < opponentlist_.size(); k++) {
-      if (p_projlist_[j].IntersectsWith(&opponentlist_[k]) == true) {
-        p_projlist_[j].SetIsActive(false);
-        opponentlist_[k].SetIsActive(false);
+      if ((*p_projlist_[j]).IntersectsWith(opponentlist_[k]) == true) {
+        (*p_projlist_[j]).SetIsActive(false);
+        (*opponentlist_[k]).SetIsActive(false);
       }
     }
   }
   // Opponent projectile and player
   for (int h = 0; h < o_projlist_.size(); h++) {
-    if (o_projlist_[h].IntersectsWith(&player_) == true) {
-      o_projlist_[h].SetIsActive(false);
+    if ((*o_projlist_[h]).IntersectsWith(&player_) == true) {
+      (*o_projlist_[h]).SetIsActive(false);
       player_.SetIsActive(false);
     }
   }
@@ -107,22 +108,22 @@ void Game::FilterIntersections() {
 void Game::MoveGameElements() {
   // Opponent moves
   for (int i = 0; i < opponentlist_.size(); i++) {
-    if (opponentlist_[i].GetIsActive() == true) {
-      opponentlist_[i].Move(gameScreen_);
+    if ((*opponentlist_[i]).GetIsActive() == true) {
+      (*opponentlist_[i]).Move(gameScreen_);
     }
   }
 
   // Opponent projectile moves
   for (int j = 0; j < o_projlist_.size(); j++) {
-    if (o_projlist_[j].GetIsActive() == true) {
-      o_projlist_[j].Move(gameScreen_);
+    if ((*o_projlist_[j]).GetIsActive() == true) {
+      (*o_projlist_[j]).Move(gameScreen_);
     }
   }
 
   // Player projectile moves
   for (int k = 0; k < p_projlist_.size(); k++) {
-    if (p_projlist_[k].GetIsActive() == true) {
-      p_projlist_[k].Move(gameScreen_);
+    if ((*p_projlist_[k]).GetIsActive() == true) {
+      (*p_projlist_[k]).Move(gameScreen_);
     }
   }
 }
