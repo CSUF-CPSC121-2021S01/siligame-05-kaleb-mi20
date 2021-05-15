@@ -21,7 +21,7 @@ void PlayerProjectile::Draw(graphics::Image &image) {
 void Player::Move(const graphics::Image &image) {}
 
 void PlayerProjectile::Move(const graphics::Image &image) {
-  SetX(x_ + 3);
+  SetY(y_ - 3);
   if (GameElement::IsOutOfBounds(image) == true) {
     GameElement::SetIsActive(false);
   }

@@ -23,7 +23,7 @@ void Opponent::Move(const graphics::Image &image) {
 }
 
 void OpponentProjectile::Move(const graphics::Image &image) {
-  SetX(x_ + 3);
+  SetY(y_ + 3);
   if (GameElement::IsOutOfBounds(image) == true) {
     GameElement::SetIsActive(false);
   }
