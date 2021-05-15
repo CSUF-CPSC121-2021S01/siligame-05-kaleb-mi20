@@ -140,17 +140,17 @@ void Game::MoveGameElements() {
 
 void Game::RemoveInactive() {
   for (int i = opponentlist_.size() - 1; i >= 0; i--) {
-    if (opponentlist_[i]->GetIsActive() == false) {
+    if ((*opponentlist_[i]).GetIsActive() == false) {
       opponentlist_.erase(opponentlist_.begin() + i);
     }
   }
   for (int k = o_projlist_.size() - 1; k >= 0; k--) {
-    if (o_projlist_[k]->GetIsActive() == false) {
+    if ((*o_projlist_[k]).GetIsActive() == false) {
       o_projlist_.erase(o_projlist_.begin() + k);
     }
   }
   for (int h = p_projlist_.size() - 1; h >= 0; h--) {
-    if (p_projlist_[h]->GetIsActive() == false) {
+    if ((*p_projlist_[h]).GetIsActive() == false) {
       p_projlist_.erase(p_projlist_.begin() + h);
     }
   }
@@ -159,7 +159,7 @@ void Game::RemoveInactive() {
 void Game::LaunchProjectiles() {
   for (int i = 0; i < opponentlist_.size(); i++) {
     std::unique_ptr<OpponentProjectile> oprojptr =
-        opponentlist_[i]->LaunchProjectile();
+        (*opponentlist_[i]).LaunchProjectile();
     if (oprojptr != nullptr) {
       o_projlist_.push_back(std::move(oprojptr));
     }
