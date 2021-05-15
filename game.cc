@@ -46,6 +46,11 @@ void Game::UpdateScreen() {
       (*p_projlist_[k]).Draw(gameScreen_);
     }
   }
+
+  if (hasLost_ == true) {
+    gameScreen_.DrawRectangle(0, 0, 800, 600, 255, 255, 255);
+    gameScreen_.DrawText(300, 100, "You just died", 20, 0, 0, 0);
+  }
 }
 
 void Game::OnMouseEvent(const graphics::MouseEvent &mouseEvent) {
