@@ -63,8 +63,11 @@ void Game::OnMouseEvent(const graphics::MouseEvent &mouseEvent) {
       player_.SetY(mouseEvent.GetY() - player_.GetWidth() / 2);
     }
   }
-  if (mouseEvent.GetMouseAction() == graphics::MouseAction::kPressed || mouseEvent.GetMouseAction() == graphics::MouseAction::kDragged) {
-    std::unique_ptr<PlayerProjectile> clickedptr = std::make_unique<PlayerProjectile>(mouseEvent.GetX(), mouseEvent.GetY());
+  if (mouseEvent.GetMouseAction() == graphics::MouseAction::kPressed ||
+      mouseEvent.GetMouseAction() == graphics::MouseAction::kDragged) {
+    std::unique_ptr<PlayerProjectile> clickedptr =
+        std::make_unique<PlayerProjectile>(mouseEvent.GetX(),
+                                           mouseEvent.GetY());
     p_projlist_.push_back(std::move(clickedptr));
   }
 }
@@ -155,7 +158,8 @@ void Game::RemoveInactive() {
 
 void Game::LaunchProjectiles() {
   for (int i = 0; i < opponentlist_.size(); i++) {
-    std::unique_ptr<OpponentProjectile> oprojptr = opponentlist_[i]->LaunchProjectile();
+    std::unique_ptr<OpponentProjectile> oprojptr =
+        opponentlist_[i]->LaunchProjectile();
     if (oprojptr != nullptr) {
       o_projlist_.push_back(std::move(oprojptr));
     }

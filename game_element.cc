@@ -22,7 +22,7 @@ bool GameElement::IntersectsWith(GameElement* element2) {
   return false;
 }
 
-bool GameElement::IsOutOfBounds(const graphics::Image &image) {
+bool GameElement::IsOutOfBounds(const graphics::Image& image) {
   // out of bounds on the left or right boundary
   if (x_ < 0 || (x_ + width_) > image.GetWidth()) {
     return true;

@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<replacements xml:space='preserve' incomplete_format='false'>
+</replacements>
+<?xml version='1.0'?>
+<replacements xml:space='preserve' incomplete_format='false'>
+</replacements>
+<?xml version='1.0'?>
+<replacements xml:space='preserve' incomplete_format='false'>
+</replacements>
+<?xml version='1.0'?>
+<replacements xml:space='preserve' incomplete_format='false'>
+<replacement offset='91' length='0'> </replacement>
+<replacement offset='92' length='1'></replacement>
+<replacement offset='678' length='0'> </replacement>
+<replacement offset='679' length='1'></replacement>
+</replacements>
+<?xml version='1.0'?>
+<replacements xml:space='preserve' incomplete_format='false'>
+<replacement offset='0' length='115'>#include "game.h"&#10;#include "opponent.h"&#10;#include "player.h"&#10;#include &lt;iostream>&#10;#include &lt;memory>&#10;#include &lt;vector></replacement>
+</replacements>
+<?xml version='1.0'?>
+<replacements xml:space='preserve' incomplete_format='false'>
+<replacement offset='35' length='104'>#include "cpputils/graphics/image.h"&#10;#include "game_element.h"&#10;#include "opponent.h"&#10;#include &lt;iostream></replacement>
+<replacement offset='219' length='2'>&#10;</replacement>
+<replacement offset='486' length='2'>&#10;</replacement>
+</replacements>
+<?xml version='1.0'?>
+<replacements xml:space='preserve' incomplete_format='false'>
+<replacement offset='39' length='80'>#include "cpputils/graphics/image.h"&#10;#include "game_element.h"&#10;#include &lt;memory></replacement>
+<replacement offset='158' length='2'>&#10;</replacement>
+<replacement offset='444' length='3'>&#10;&#10;</replacement>
+<replacement offset='522' length='2'>&#10;</replacement>
+</replacements>
+<?xml version='1.0'?>
+<replacements xml:space='preserve' incomplete_format='false'>
+<replacement offset='104' length='2'>&#10;</replacement>
+<replacement offset='889' length='3'>&#10;&#10;</replacement>
+</replacements>
+<?xml version='1.0'?>
+<replacements xml:space='preserve' incomplete_format='false'>
+<replacement offset='30' length='203'>#include "cpputils/graphics/image.h"&#10;#include "cpputils/graphics/image_event.h"&#10;#include "game_element.h"&#10;#include "opponent.h"&#10;#include "player.h"&#10;#include &lt;iostream>&#10;#include &lt;string>&#10;#include &lt;vector></replacement>
+<replacement offset='312' length='2'>&#10;</replacement>
+<replacement offset='1394' length='3'>&#10;&#10;</replacement>
+</replacements>

@@ -19,11 +19,19 @@ class Game : graphics::AnimationEventListener, graphics::MouseEventListener {
 
   // Getters and Setters
   graphics::Image &GetGameScreen() { return gameScreen_; }
-  std::vector<std::unique_ptr<Opponent>> &GetOpponents() { return opponentlist_; }
+
+  std::vector<std::unique_ptr<Opponent>> &GetOpponents() {
+    return opponentlist_;
+  }
+
   std::vector<std::unique_ptr<OpponentProjectile>> &GetOpponentProjectiles() {
     return o_projlist_;
   }
-  std::vector<std::unique_ptr<PlayerProjectile>> &GetPlayerProjectiles() { return p_projlist_; }
+
+  std::vector<std::unique_ptr<PlayerProjectile>> &GetPlayerProjectiles() {
+    return p_projlist_;
+  }
+
   Player &GetPlayer() { return player_; }
 
   // Member functions

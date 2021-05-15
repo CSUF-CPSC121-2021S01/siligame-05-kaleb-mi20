@@ -14,6 +14,7 @@ class Opponent : public GameElement {
   void Draw(graphics::Image &image);
   void Move(const graphics::Image &image);
   std::unique_ptr<class OpponentProjectile> LaunchProjectile();
+
  private:
   int counter;
 };
